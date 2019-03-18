@@ -16,7 +16,7 @@ import com.vsoft.base.TestBase;
 
 public class DocuCiteTest extends TestBase {
 
-	private static Logger logger = Logger.getLogger(DocuCite.class);
+	private static Logger logger = Logger.getLogger(DocuCiteTest.class);
 	AppiumReportWrapper allActions = new AppiumReportWrapper();
 
 	private LoginPageMethods login;
