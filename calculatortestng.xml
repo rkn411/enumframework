@@ -1,8 +1,0 @@
-<suite name="Suite1" parallel="none">
-	<test name="chrome1">
-	    <parameter name="platform" value="android" />
-		<classes>
-			<class name="com.tsd.tests.CalculatorTest" />
-		</classes>
-	</test>
-</suite>

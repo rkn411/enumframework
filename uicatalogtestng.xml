@@ -1,8 +1,0 @@
-<suite name="Suite1" parallel="none">
-	<test name="chrome1">
-	    <parameter name="platform" value="ios" />
-		<classes>
-			<class name="com.tsd.tests.UiCatalogTest" />
-		</classes>
-	</test>
-</suite>
