@@ -66,17 +66,45 @@ public class ScreenshotUtil extends PageBase {
 	 * @return Screenshot
 	 */
 	public static Screenshot assertTakeScreenshot() {
+		
 
+		
 		String screenshotFilePath = assertgenerateScreenshotPath();
-		ru.yandex.qatools.ashot.Screenshot screenshot = new AShot()
-				.shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(getDriver());
-		File screenshotFile = new File(screenshotFilePath);
+		
+		// Convert web driver object to TakeScreenshot
+		TakesScreenshot scrShot = ((TakesScreenshot) getDriver());
+
+		// Call getScreenshotAs method to create image file
+
+		File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
+
+		// Move image file to new destination
+
+		File DestFile = new File(screenshotFilePath);
+
+		// Copy file at destination
+
 		try {
-			ImageIO.write(screenshot.getImage(), "PNG", screenshotFile);
+			FileUtils.copyFile(SrcFile, DestFile);
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new Screenshot(screenshotFile.getAbsolutePath(), screenshotFile);
+
+		return new Screenshot(DestFile.getAbsolutePath(), DestFile);
+	
+		
+
+//		String screenshotFilePath = assertgenerateScreenshotPath();
+//		ru.yandex.qatools.ashot.Screenshot screenshot = new AShot()
+//				.shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(getDriver());
+//		File screenshotFile = new File(screenshotFilePath);
+//		try {
+//			ImageIO.write(screenshot.getImage(), "PNG", screenshotFile);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		return new Screenshot(screenshotFile.getAbsolutePath(), screenshotFile);
 	}
 
 	/**

@@ -64,7 +64,7 @@ public class DocuCiteTest extends TestBase {
 			DocuCite.textDocumentQualitymsg.waitForElementToBeVisible(45);
 			DocuCite.btnOK.click();
 			String PostDocCount = DocuCite.elementDocumentCount.getElementText();
-			Assertions.verify("Check douments count", "1 Documents", PostDocCount, false);
+			Assertions.verify("Check douments count", "1 Document", PostDocCount, false);
 			DocuCite.elementCloudIcon.click();
 			DocuCite.textReadToGo.waitForElementToBeVisible(10);
 			Assertions.verify("Check Full Name is ", firstName + " " + middleName + " " + lastName,

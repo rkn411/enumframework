@@ -46,7 +46,7 @@ public class DriverFactory extends PageBase {
 		caps.setCapability("platformName", "android");
 		caps.setCapability("platformVersion", androidversion);
 		caps.setCapability("autoDismissAlerts", true);
-		caps.setCapability("app", System.getProperty("user.dir") + "\\src\\test\\resources\\DocuCite_devBuild.apk");
+		caps.setCapability("app", System.getProperty("user.dir") + "\\Resources\\DocuCite_devBuild.apk");
 //		caps.setCapability("appPackage", "com.example.android.apis");
 //		caps.setCapability("appActivity", "com.example.android.apis.ApiDemos");
 //		caps.setCapability("appPackage", "com.apsrtc.online");
@@ -75,7 +75,7 @@ public class DriverFactory extends PageBase {
 		caps.setCapability("autoAcceptAlerts", true);
 		caps.setCapability("udid", udid);
 		caps.setCapability("bundleId", bundleid);
-		caps.setCapability("app", System.getProperty("user.dir") + "/src/test/resources/DocuCite.ipa");
+		caps.setCapability("app", System.getProperty("user.dir") + "/Resources/DocuCite.ipa");
 		return new IOSDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
 
 	}

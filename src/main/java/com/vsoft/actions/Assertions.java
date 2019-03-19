@@ -1,6 +1,6 @@
 package com.vsoft.actions;
 
-import static com.vsoft.core.extreport.ExtentTestManager.failStep;
+import static com.vsoft.core.extreport.ExtentTestManager.assertFailStep;
 import static com.vsoft.core.extreport.ExtentTestManager.passStep;
 
 import org.apache.log4j.Logger;
@@ -25,7 +25,7 @@ public class Assertions {
 		} else {
 			actionResult.setDescription(verificationDescription + ": Failed");
 			logger.error(verificationDescription + ": Failed");
-			failStep(actionResult);
+			assertFailStep(actionResult);
 		}
 	}
 
@@ -45,7 +45,7 @@ public class Assertions {
 		} else {
 			actionResult.setDescription(verificationDescription + ": Failed");
 			logger.error(verificationDescription + ": Failed");
-			failStep(actionResult, testExitOnFailure);
+			assertFailStep(actionResult, testExitOnFailure);
 		}
 	}
 
@@ -78,7 +78,7 @@ public class Assertions {
 			actionResult.setDescription(verificationDescription + ": Failed. " + "/n" + " Expected: '" + expectedValue
 					+ "' but found: " + "'" + actualValue + "'.");
 			logger.error(verificationDescription + ": Failed");
-			failStep(actionResult, testExitOnFailure);
+			assertFailStep(actionResult, testExitOnFailure);
 		}
 	}
 
@@ -110,7 +110,7 @@ public class Assertions {
 			actionResult.setDescription(verificationDescription + ": Failed. " + "/n" + " Expected: '" + expectedValue
 					+ "' but found: " + "'" + actualValue + "'.");
 			logger.error(verificationDescription + ": Failed");
-			failStep(actionResult);
+			assertFailStep(actionResult);
 		}
 	}
 }
