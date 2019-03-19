@@ -1,5 +1,5 @@
 <suite name="Suite1" parallel="none">
-	<test name="chrome1">
+	<test name="HyciteiOSTest">
 	    <parameter name="platform" value="ios" />
 		<classes>
 			<class name="com.tsd.tests.DocuCiteTest" />
