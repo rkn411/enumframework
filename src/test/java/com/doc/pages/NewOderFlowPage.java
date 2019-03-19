@@ -8,8 +8,6 @@ public class NewOderFlowPage extends TestBase {
 	AppiumReportWrapper allActions = new AppiumReportWrapper();
 
 	public void selectDistributor(String distributor) {
-		DocuCite.elementStartNewOder.waitForElementToBeVisible(50);
-		DocuCite.elementStartNewOder.click();
 		if (platformName.get().equalsIgnoreCase("android")) {
 			DocuCite.lstDistributorItem.updateLocator(platformName.get(), "US - 13039 : NAOMY C WILLIS");
 			DocuCite.lstDistributorItem.scrollIntoElement("US - 13039 : NAOMY C WILLIS");

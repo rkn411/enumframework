@@ -3,17 +3,16 @@ package com.vsoft.elements.core;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
-import com.vsoft.actions.PageActions;
 import com.vsoft.actions.AppiumReportWrapper;
 import com.vsoft.actions.DeviceActions;
-import com.vsoft.base.PageBase;
+import com.vsoft.actions.PageActions;
 
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 
 public interface BaseElement {
-	
+
 	public By getLocator(String platforName);
 
 	public By getAndroidLocator();
@@ -21,14 +20,10 @@ public interface BaseElement {
 	public By getIOSLocator();
 
 	public String getName();
-	
+
 	public void resetLocator();
-	
-	//public BaseElement resetIOSLocator();
-	
-	public BaseElement setLocator(String platformName,By by);
-	
-	//public BaseElement setAndroidLocator(By by);
+
+	public BaseElement setLocator(String platformName, By by);
 
 	public default void updateLocator(String platformName, String... updatedVal) {
 		resetLocator();
@@ -71,49 +66,6 @@ public interface BaseElement {
 			break;
 		}
 	}
-	
-//	public default void updateIOSLocator(String... updatedVal) {
-//		resetIOSLocator();
-//		String strLoc = getIOSLocator().toString();
-//		String[] arrLoc = strLoc.split(":", 2);
-//		String locatorType = arrLoc[0];
-//		locatorType = locatorType.substring(3);
-//		String locatorValue = arrLoc[1].trim();
-//
-//		for (String lVal : updatedVal)
-//			locatorValue = locatorValue.replaceFirst("replaceit", lVal);
-//
-//		switch (locatorType.toLowerCase()) {
-//		case "id":
-//			setIOSLocator(MobileBy.AccessibilityId(locatorValue));
-//			break;
-//		case "xpath":
-//			setIOSLocator(MobileBy.xpath(locatorValue));
-//			break;
-//		case "cssselector":
-//			setIOSLocator(MobileBy.cssSelector(locatorValue));
-//			break;
-//		case "name":
-//			setIOSLocator(MobileBy.name(locatorValue));
-//			break;
-//		case "tagname":
-//			setIOSLocator(MobileBy.tagName(locatorValue));
-//			break;
-//		case "classname":
-//			setIOSLocator(MobileBy.className(locatorValue));
-//			break;
-//		case "linktext":
-//			setIOSLocator(MobileBy.linkText(locatorValue));
-//			break;
-//		case "partiallinktext":
-//			setIOSLocator(MobileBy.partialLinkText(locatorValue));
-//			break;
-//		default:
-//			System.out.println("Update Locator Failed");
-//			break;
-//		}
-//	}
-	
 
 	AppiumReportWrapper allActions = new AppiumReportWrapper();
 	PageActions pageActions = allActions;
@@ -161,25 +113,25 @@ public interface BaseElement {
 	}
 
 	public default void scrollIntoElement(String valuetoscroll) {
-		allActions.scrollIntoView(this,valuetoscroll);
+		allActions.scrollIntoView(this, valuetoscroll);
 	}
-	
+
 	public default void scrollToElementByJs(String valuetoscroll) {
-		allActions.scrollToElementByJs(this,valuetoscroll);
+		allActions.scrollToElementByJs(this, valuetoscroll);
 	}
-	
+
 	public default void scrollUpOrDownElementIos(String move) {
-		allActions.scrollUpOrDownElementIos(this,move);
+		allActions.scrollUpOrDownElementIos(this, move);
 	}
-	
+
 	public default void pressAndReleaseElement(BaseElement element) {
-		allActions.pressAndReleaseElement(this,element);
+		allActions.pressAndReleaseElement(this, element);
 	}
 
 	public default void longPressAndReleaseElement(BaseElement element) {
-		allActions.longPressAndReleaseElement(this,element);
+		allActions.longPressAndReleaseElement(this, element);
 	}
-	
+
 	public default void checkElementPresence() {
 		allActions.isElementPresent(this);
 	}
@@ -240,7 +192,7 @@ public interface BaseElement {
 		return allActions.getAttribute(this, attributeName);
 	}
 
-	public default List<WebElement> getElementList() {
+	public default List<MobileElement> getElementList() {
 		return allActions.getElementList(this);
 	}
 
@@ -307,11 +259,11 @@ public interface BaseElement {
 	public default void verifyElementPresent(long timeOutInSeconds) {
 		allActions.verifyElementPresent(this);
 	}
-	
+
 	public default void pickerWheelEnterText(String valToEnter) {
 		allActions.pickerWheelEnterText(this, valToEnter);
 	}
-	
+
 	public default void switchOrSteppersClick() {
 		allActions.switchOrSteppersClick(this);
 	}

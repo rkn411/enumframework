@@ -28,8 +28,8 @@ public class DocuCiteTest extends TestBase {
 		neworder = new NewOderFlowPage();
 	}
 
-	@Test
-	public void testDocuciteLogin() {
+	@Test(enabled= false)
+	public void stratNewOrder() {
 		try {
 			// step1
 			if (platformName.get().equalsIgnoreCase("ios"))
@@ -37,6 +37,8 @@ public class DocuCiteTest extends TestBase {
 			login.selectLanguageandLogin("English", ConfigProperties.USERNAME, ConfigProperties.PASSWORD);
 
 			// step2
+			DocuCite.elementStartNewOrder.waitForElementToBeVisible(50);
+			DocuCite.elementStartNewOrder.click();
 			neworder.selectDistributor("US - 13039 : NAOMY C WILLIS");
 			String firstName = GenerateDataUtil.getFirstName();
 			String middleName = GenerateDataUtil.getLastName();
@@ -69,6 +71,56 @@ public class DocuCiteTest extends TestBase {
 			DocuCite.textReadToGo.waitForElementToBeVisible(10);
 			Assertions.verify("Check Full Name is ", firstName + " " + middleName + " " + lastName,
 					DocuCite.textFullName.getElementText(), true);
+			DocuCite.btnOK.click();
+
+			if (DocuCite.popUpProcessPayment.isDisplayed()) {
+				DocuCite.btnPaymentNo.click();
+			}
+			DocuCite.textNewOrderConfirmQueue.verifyDisplayed(20);
+			DocuCite.btnThankUOK.click();
+
+		} catch (Exception e) {
+			logger.error("Test run with exception and failed " + ExceptionUtil.getExceptionStackTrace(e));
+		}
+	}
+	
+	@Test
+	public void matchToOrder() {
+		try {
+			// step1
+			if (platformName.get().equalsIgnoreCase("ios"))
+				DocuCite.btnAllowDocuCite.click();
+			login.selectLanguageandLogin("English", ConfigProperties.USERNAME, ConfigProperties.PASSWORD);
+
+			// step2
+			DocuCite.elementMatchToOrder.waitForElementToBeVisible(50);
+			DocuCite.elementMatchToOrder.click();
+			DocuCite.textDataLoading.waitForElementToBeInvisible(30);
+
+			Assertions.verify(DocuCite.lstMatchToOrder.getElementList().size()>0, "Match to Orders list");
+			DocuCite.firstelementMatchToOrder.click();
+			DocuCite.btnOK.click();
+			
+			// step3
+			String PreDocCount = DocuCite.elementDocumentCount.getElementText();
+			Assertions.verify("Check douments count", "0 Documents", PreDocCount, false);
+			DocuCite.elementPlusIcon.click();
+			if (platformName.get().equalsIgnoreCase("ios")) {
+				if (DocuCite.popUpCameraAccess.isDisplayed()) {
+					DocuCite.btnAllowCameraAccess.click();
+				}
+				if (DocuCite.popUpLocationAccess.isDisplayed()) {
+					DocuCite.btnAllowDocuCite.click();
+				}
+			}
+			DocuCite.btnAutoManual.click();
+			DocuCite.btnCapture.click();
+			DocuCite.textDocumentQualitymsg.waitForElementToBeVisible(45);
+			DocuCite.btnOK.click();
+			String PostDocCount = DocuCite.elementDocumentCount.getElementText();
+			Assertions.verify("Check douments count", "1 Document", PostDocCount, false);
+			DocuCite.elementCloudIcon.click();
+			DocuCite.textReadToGo.waitForElementToBeVisible(10);
 			DocuCite.btnOK.click();
 
 			if (DocuCite.popUpProcessPayment.isDisplayed()) {

@@ -2,9 +2,9 @@ package com.vsoft.actions;
 
 import java.util.List;
 
-import org.openqa.selenium.WebElement;
-
 import com.vsoft.elements.core.BaseElement;
+
+import io.appium.java_client.MobileElement;
 
 public interface ElementActions {
 
@@ -58,7 +58,7 @@ public interface ElementActions {
 
 	// Element Actions
 	void click(BaseElement eLocator) throws TestFailedException;
-	
+
 	void switchOrSteppersClick(BaseElement eLocator);
 
 	void jsClick(BaseElement eLocator);
@@ -71,7 +71,7 @@ public interface ElementActions {
 
 	void selectByVisibleText(BaseElement eLocator, String valueToSelect) throws TestFailedException;
 
-	List<WebElement> getElementList(BaseElement eLocator);
+	List<MobileElement> getElementList(BaseElement eLocator);
 
 	Boolean verifyItemInsideList(BaseElement eLocator, String valueToVerify);
 
@@ -92,7 +92,7 @@ public interface ElementActions {
 	// Make Element Visible
 	void moveToElement(BaseElement eLocator);
 
-	void scrollIntoView(BaseElement eLocator,String text);
+	void scrollIntoView(BaseElement eLocator, String text);
 
 	void highlight(BaseElement eLocator);
 }

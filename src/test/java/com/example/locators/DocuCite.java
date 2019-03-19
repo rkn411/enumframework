@@ -27,10 +27,10 @@ public enum DocuCite implements BaseElement {
 	btnCancelacceptance(MobileBy.id("com.hycite.docucite:id/btn_cancel"),null),
 	
 	//home page
-	textDataLoading(MobileBy.xpath("//android.widget.TextView[@text='Data Loading...']"),null),
-	elementStartNewOder(MobileBy.id("com.hycite.docucite:id/home_screen_start_new_order_ll_txt"),MobileBy.xpath("//XCUIElementTypeButton[@name='home_new_order_button']/..")),
+	textDataLoading(MobileBy.xpath("//android.widget.TextView[@text='Data Loading...']"),MobileBy.xpath("//XCUIElementTypeStaticText[@name='Data Loading...']")),
+	elementStartNewOrder(MobileBy.id("com.hycite.docucite:id/home_screen_start_new_order_ll_txt"),MobileBy.xpath("//XCUIElementTypeButton[@name='home_new_order_button']/..")),
 	elementOderApproval(MobileBy.id("com.hycite.docucite:id/home_screen_order_approval_ll_txt"),null),
-	elementMatchToOder(MobileBy.id("com.hycite.docucite:id/home_screen_match_order_ll_text"),null),
+	elementMatchToOrder(MobileBy.id("com.hycite.docucite:id/home_screen_match_order_ll_text"),MobileBy.xpath("//XCUIElementTypeButton[@name='home_match_to_order_button']/..")),
 	elementProcessPayment(MobileBy.id("com.hycite.docucite:id/home_screen_process_payment_ll_text"),null),
 	elementHomePageLogo(MobileBy.id("com.hycite.docucite:id/imgLogo"),null),
 	elementEmailIcon(MobileBy.id("com.hycite.docucite:id/home_screen_email_img"),null),
@@ -46,6 +46,11 @@ public enum DocuCite implements BaseElement {
 	btnOK(MobileBy.id("com.hycite.docucite:id/mto_ok"),MobileBy.xpath("//XCUIElementTypeButton[@label='OK Button 55']")),
 	lstDistributorItem(MobileBy.xpath("//android.widget.TextView[@text='replaceit']"),MobileBy.xpath("//XCUIElementTypePickerWheel")),
 	
+	//Match to Order
+	btnMatchToOrderFilter(null,MobileBy.AccessibilityId("ActiveFilter Icon")),
+	btnMatchToOrderSort(null,MobileBy.AccessibilityId("sorticon")),
+	lstMatchToOrder(null,MobileBy.xpath("//XCUIElementTypeTable[@name='match_to_order_table_view']/XCUIElementTypeCell")),
+	firstelementMatchToOrder(null,MobileBy.xpath("//XCUIElementTypeTable[@name='match_to_order_table_view']/XCUIElementTypeCell[1]")),
 	
 	//New oder documents
 	elementFirstMiddleName(MobileBy.id("com.hycite.docucite:id/order_main_screen_customer_name"),MobileBy.AccessibilityId("full_name_label")),

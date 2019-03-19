@@ -427,15 +427,14 @@ public class AppiumWrapper extends PageBase {
 	 * @param eLocator
 	 * @return text
 	 */
-	public static List<WebElement> getElementList(BaseElement eLocator) {
-		List<WebElement> list = null;
+	public static List<MobileElement> getElementList(BaseElement eLocator) {
+		List<MobileElement> list = null;
 		try {
 			By by = eLocator.getLocator(platformName.get());
-			WebElement we = new WebDriverWait(getDriver(), EXPLICIT_WAIT_TIME)
-					.until(ExpectedConditions.visibilityOfElementLocated(by));
+			new WebDriverWait(getDriver(), EXPLICIT_WAIT_TIME).until(ExpectedConditions.visibilityOfElementLocated(by));
 			if (HIGHLIGHT_ELEMENT)
 				highlight(eLocator);
-			list = we.findElements(by);
+			list = driver.get().findElements(by);
 		} catch (Exception e) {
 			logger.error("Exception Details: " + getExceptionStackTrace(e));
 		}

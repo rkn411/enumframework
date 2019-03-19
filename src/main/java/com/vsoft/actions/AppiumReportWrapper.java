@@ -7,13 +7,14 @@ import static com.vsoft.core.extreport.ExtentTestManager.passStep;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.WebElement;
 
 import com.vsoft.automation.utilities.ElementsUtil;
 import com.vsoft.core.report.ActionResult;
 import com.vsoft.elements.core.BaseElement;
 
-public class AppiumReportWrapper implements PageActions, ElementActions,DeviceActions {
+import io.appium.java_client.MobileElement;
+
+public class AppiumReportWrapper implements PageActions, ElementActions, DeviceActions {
 
 	public static Logger logger = Logger.getLogger(AppiumReportWrapper.class);
 
@@ -765,9 +766,9 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 	 * @throws Exception
 	 *
 	 */
-	public List<WebElement> getElementList(BaseElement eLocator) {
+	public List<MobileElement> getElementList(BaseElement eLocator) {
 		ActionResult actionResult = null;
-		List<WebElement> list = null;
+		List<MobileElement> list = null;
 		try {
 			logger.info("trying to get the element list for : '" + ElementsUtil.getElementName(eLocator.getName())
 					+ "'...");
@@ -939,7 +940,8 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 	}
 
 	/**
-	 * use this method to scroll to the element and do necessary report task for andriod specific.
+	 * use this method to scroll to the element and do necessary report task for
+	 * andriod specific.
 	 * 
 	 * @param eLocator
 	 * @return actionResult
@@ -947,19 +949,17 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 	 *
 	 */
 
-	public void scrollIntoView(BaseElement eLocator,String text) {
+	public void scrollIntoView(BaseElement eLocator, String text) {
 		ActionResult actionResult = null;
 		try {
-			logger.info(
-					"trying to scroll to the element: '" + ElementsUtil.getElementName(text) + "'...");
-			boolean result = AppiumWrapper.scrollIntoView(eLocator,text);
+			logger.info("trying to scroll to the element: '" + ElementsUtil.getElementName(text) + "'...");
+			boolean result = AppiumWrapper.scrollIntoView(eLocator, text);
 			actionResult = new ActionResult(result);
 			actionResult.setActionName(Thread.currentThread().getStackTrace()[1].getMethodName());
 			actionResult.setElementName(text);
 
 			if (actionResult.getStatus() == true) {
-				actionResult.setDescription(
-						"Scrolled to the element: '" + ElementsUtil.getElementName(text) + "'.");
+				actionResult.setDescription("Scrolled to the element: '" + ElementsUtil.getElementName(text) + "'.");
 				logger.info(actionResult.getDescription());
 			} else {
 				actionResult.setDescription(
@@ -971,9 +971,10 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 			logger.info("Exception Details: " + getExceptionStackTrace(e));
 		}
 	}
-	
+
 	/**
-	 * use this method to scroll to the element and do necessary report task for andriod specific.
+	 * use this method to scroll to the element and do necessary report task for
+	 * andriod specific.
 	 * 
 	 * @param eLocator
 	 * @return actionResult
@@ -981,19 +982,17 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 	 *
 	 */
 
-	public void scrollToElementByJs(BaseElement eLocator,String text) {
+	public void scrollToElementByJs(BaseElement eLocator, String text) {
 		ActionResult actionResult = null;
 		try {
-			logger.info(
-					"trying to scroll to the element: '" + ElementsUtil.getElementName(text) + "'...");
-			boolean result = AppiumWrapper.scrollToElementByJs(eLocator,text);
+			logger.info("trying to scroll to the element: '" + ElementsUtil.getElementName(text) + "'...");
+			boolean result = AppiumWrapper.scrollToElementByJs(eLocator, text);
 			actionResult = new ActionResult(result);
 			actionResult.setActionName(Thread.currentThread().getStackTrace()[1].getMethodName());
 			actionResult.setElementName(text);
 
 			if (actionResult.getStatus() == true) {
-				actionResult.setDescription(
-						"Scrolled to the element: '" + ElementsUtil.getElementName(text) + "'.");
+				actionResult.setDescription("Scrolled to the element: '" + ElementsUtil.getElementName(text) + "'.");
 				logger.info(actionResult.getDescription());
 			} else {
 				actionResult.setDescription(
@@ -1005,9 +1004,10 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 			logger.info("Exception Details: " + getExceptionStackTrace(e));
 		}
 	}
-	
+
 	/**
-	 * use this method to scroll to the element and do necessary report task for andriod specific.
+	 * use this method to scroll to the element and do necessary report task for
+	 * andriod specific.
 	 * 
 	 * @param eLocator
 	 * @return actionResult
@@ -1015,12 +1015,12 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 	 *
 	 */
 
-	public void scrollUpOrDownElementIos(BaseElement eLocator,String move) {
+	public void scrollUpOrDownElementIos(BaseElement eLocator, String move) {
 		ActionResult actionResult = null;
 		try {
 			logger.info(
 					"trying to scroll to the element: '" + ElementsUtil.getElementName(eLocator.getName()) + "'...");
-			boolean result = AppiumWrapper.scrollUpOrDownElementIos(eLocator,move);
+			boolean result = AppiumWrapper.scrollUpOrDownElementIos(eLocator, move);
 			actionResult = new ActionResult(result);
 			actionResult.setActionName(Thread.currentThread().getStackTrace()[1].getMethodName());
 			actionResult.setElementName(eLocator.getName());
@@ -1039,9 +1039,10 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 			logger.info("Exception Details: " + getExceptionStackTrace(e));
 		}
 	}
-	
+
 	/**
-	 * use this method to press and release on another element for scrolling type and do necessary report task for andriod specific.
+	 * use this method to press and release on another element for scrolling type
+	 * and do necessary report task for andriod specific.
 	 * 
 	 * @param eLocator
 	 * @return actionResult
@@ -1049,12 +1050,11 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 	 *
 	 */
 
-	public void pressAndReleaseElement(BaseElement from,BaseElement to) {
+	public void pressAndReleaseElement(BaseElement from, BaseElement to) {
 		ActionResult actionResult = null;
 		try {
-			logger.info(
-					"trying to press on element: '" + ElementsUtil.getElementName(from.getName()) + "'...");
-			boolean result = AppiumWrapper.pressAndReleaseElement(from,to);
+			logger.info("trying to press on element: '" + ElementsUtil.getElementName(from.getName()) + "'...");
+			boolean result = AppiumWrapper.pressAndReleaseElement(from, to);
 			actionResult = new ActionResult(result);
 			actionResult.setActionName(Thread.currentThread().getStackTrace()[1].getMethodName());
 			actionResult.setElementName(from.getName());
@@ -1073,9 +1073,10 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 			logger.info("Exception Details: " + getExceptionStackTrace(e));
 		}
 	}
-	
+
 	/**
-	 * use this method to press and release on another element for scrolling type and do necessary report task for andriod specific.
+	 * use this method to press and release on another element for scrolling type
+	 * and do necessary report task for andriod specific.
 	 * 
 	 * @param eLocator
 	 * @return actionResult
@@ -1083,12 +1084,11 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 	 *
 	 */
 
-	public void longPressAndReleaseElement(BaseElement from,BaseElement to) {
+	public void longPressAndReleaseElement(BaseElement from, BaseElement to) {
 		ActionResult actionResult = null;
 		try {
-			logger.info(
-					"trying to press on element: '" + ElementsUtil.getElementName(from.getName()) + "'...");
-			boolean result = AppiumWrapper.longPressAndReleaseElement(from,to);
+			logger.info("trying to press on element: '" + ElementsUtil.getElementName(from.getName()) + "'...");
+			boolean result = AppiumWrapper.longPressAndReleaseElement(from, to);
 			actionResult = new ActionResult(result);
 			actionResult.setActionName(Thread.currentThread().getStackTrace()[1].getMethodName());
 			actionResult.setElementName(from.getName());
@@ -1107,7 +1107,6 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 			logger.info("Exception Details: " + getExceptionStackTrace(e));
 		}
 	}
-	
 
 	/**
 	 * use this method to get the attribute of the element and do necessary report
@@ -2094,13 +2093,13 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 	@Override
 	public void pressKeyCode() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void longPressKeyCode() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/**
@@ -2157,7 +2156,7 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 		} catch (Exception e) {
 			logger.info("Exception Details: " + getExceptionStackTrace(e));
 		}
-		
+
 	}
 
 	/**
@@ -2184,7 +2183,7 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 		} catch (Exception e) {
 			logger.info("Exception Details: " + getExceptionStackTrace(e));
 		}
-		
+
 	}
 
 	/**
@@ -2200,16 +2199,16 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 	public void pickerWheelEnterText(BaseElement eLocator, String valueToEnter) {
 		ActionResult actionResult = null;
 		try {
-			logger.info("trying to append text for the picker wheel element: '" + ElementsUtil.getElementName(eLocator.getName())
-					+ "'...");
+			logger.info("trying to append text for the picker wheel element: '"
+					+ ElementsUtil.getElementName(eLocator.getName()) + "'...");
 			boolean result = AppiumWrapper.pickerWheelEnterText(eLocator, valueToEnter);
 			actionResult = new ActionResult(result);
 			actionResult.setActionName(Thread.currentThread().getStackTrace()[1].getMethodName());
 			actionResult.setElementName(eLocator.getName());
 
 			if (actionResult.getStatus() == true) {
-				actionResult.setDescription(
-						"Entered text for picker wheel element: '" + ElementsUtil.getElementName(eLocator.getName()) + "'.");
+				actionResult.setDescription("Entered text for picker wheel element: '"
+						+ ElementsUtil.getElementName(eLocator.getName()) + "'.");
 				logger.info(actionResult.getDescription());
 				passStep(actionResult);
 			} else {
@@ -2222,9 +2221,10 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 			logger.info("Exception Details: " + getExceptionStackTrace(e));
 		}
 	}
-	
+
 	/**
-	 * use this method to press element and release element from one position to another position using coordinates
+	 * use this method to press element and release element from one position to
+	 * another position using coordinates
 	 * 
 	 * @param xStart
 	 * @param yStart
@@ -2236,9 +2236,8 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 	public void pressAndReleaseElementUsingCoordinates(int xStart, int yStart, int xEnd, int yEnd) {
 		ActionResult actionResult = null;
 		try {
-			logger.info(
-					"trying to press on element using corordinates...");
-			boolean result = AppiumWrapper.pressAndReleaseElementUsingCoordinates(xStart, yStart, xEnd, yEnd);			
+			logger.info("trying to press on element using corordinates...");
+			boolean result = AppiumWrapper.pressAndReleaseElementUsingCoordinates(xStart, yStart, xEnd, yEnd);
 			actionResult = new ActionResult(result);
 			actionResult.setActionName(Thread.currentThread().getStackTrace()[1].getMethodName());
 
@@ -2254,7 +2253,7 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 			logger.info("Exception Details: " + getExceptionStackTrace(e));
 		}
 	}
-	
+
 	/**
 	 * use this method to click on the switch element and do necessary report task.
 	 * 
@@ -2289,7 +2288,6 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 		}
 	}
 
-	
 	@Override
 	public String getClipboardText() {
 		// TODO Auto-generated method stub
@@ -2299,25 +2297,25 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 	@Override
 	public void setClipboardText() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void shake() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void lockDevice() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void unlockDevice() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -2329,32 +2327,31 @@ public class AppiumReportWrapper implements PageActions, ElementActions,DeviceAc
 	@Override
 	public void toggleAirplaneMode() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void toggleData() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void toggleWifi() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void toggleLocationServices() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void sendSMS() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	
 }
