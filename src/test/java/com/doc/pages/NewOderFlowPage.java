@@ -30,5 +30,4 @@ public class NewOderFlowPage extends TestBase {
 		allActions.hideKeyboard();
 		DocuCite.btnOK.click();
 	}
-
 }

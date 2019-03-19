@@ -30,35 +30,26 @@ public class DocuCiteTest extends TestBase {
 
 	@Test
 	public void testDocuciteLogin() {
-
-		String PreDocCount = null;
-		String PostDocCount = null;
-		String firstName, lastName, middleName;
 		try {
+			// step1
 			if (platformName.get().equalsIgnoreCase("ios"))
 				DocuCite.btnAllowDocuCite.click();
 			login.selectLanguageandLogin("English", ConfigProperties.USERNAME, ConfigProperties.PASSWORD);
 
+			// step2
 			neworder.selectDistributor("US - 13039 : NAOMY C WILLIS");
-
-			firstName = GenerateDataUtil.getFirstName();
-			middleName = GenerateDataUtil.getLastName();
-			lastName = GenerateDataUtil.getLastName();
-
+			String firstName = GenerateDataUtil.getFirstName();
+			String middleName = GenerateDataUtil.getLastName();
+			String lastName = GenerateDataUtil.getLastName();
 			neworder.enterNameDetails(firstName, middleName, lastName);
 
-			// adding documents and verifying
-
+			// step3
 			DocuCite.elementFirstMiddleName.waitForElementToBeVisible(15);
-			System.out.println("First and middle Name is " + DocuCite.elementFirstMiddleName.getElementText());
 			Assertions.verify("Check First and middle name is ", firstName + " " + middleName,
 					DocuCite.elementFirstMiddleName.getElementText(), true);
-			System.out.println("Last Name is " + DocuCite.elementLastName.getElementText());
 			Assertions.verify("Check Last name is ", lastName, DocuCite.elementLastName.getElementText(), true);
-
-			PreDocCount = DocuCite.elementDocumentCount.getElementText();
-			System.out.println("Doc Count " + PreDocCount);
-
+			String PreDocCount = DocuCite.elementDocumentCount.getElementText();
+			Assertions.verify("Check douments count", "0 Documents", PreDocCount, false);
 			DocuCite.elementPlusIcon.click();
 			if (platformName.get().equalsIgnoreCase("ios")) {
 				if (DocuCite.popUpCameraAccess.isDisplayed()) {
@@ -70,28 +61,21 @@ public class DocuCiteTest extends TestBase {
 			}
 			DocuCite.btnAutoManual.click();
 			DocuCite.btnCapture.click();
-
 			DocuCite.textDocumentQualitymsg.waitForElementToBeVisible(45);
 			DocuCite.btnOK.click();
-
-			PostDocCount = DocuCite.elementDocumentCount.getElementText();
-			System.out.println("pst Count " + PostDocCount);
-
+			String PostDocCount = DocuCite.elementDocumentCount.getElementText();
+			Assertions.verify("Check douments count", "1 Documents", PostDocCount, false);
 			DocuCite.elementCloudIcon.click();
-
-			// Ready to Go page
 			DocuCite.textReadToGo.waitForElementToBeVisible(10);
-			System.out.println("Full name " + DocuCite.textFullName.getElementText());
 			Assertions.verify("Check Full Name is ", firstName + " " + middleName + " " + lastName,
 					DocuCite.textFullName.getElementText(), true);
-
 			DocuCite.btnOK.click();
 
 			if (DocuCite.popUpProcessPayment.isDisplayed()) {
 				DocuCite.btnPaymentNo.click();
 			}
 			DocuCite.textNewOrderConfirmQueue.verifyDisplayed(20);
-			DocuCite.btnOK.click();
+			DocuCite.btnThankUOK.click();
 
 		} catch (Exception e) {
 			logger.error("Test run with exception and failed " + ExceptionUtil.getExceptionStackTrace(e));

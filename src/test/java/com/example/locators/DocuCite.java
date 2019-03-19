@@ -78,7 +78,7 @@ public enum DocuCite implements BaseElement {
 	textNewOrderConfirmMessage(MobileBy.id("com.hycite.docucite:id/order_confirm_doc_count"),null),
 	
 	textNewOrderConfirmQueue(MobileBy.id("com.hycite.docucite:id/thank_you_msg"),MobileBy.AccessibilityId("thankyou_confirmation_text_label")),
-	btnThankUOK(MobileBy.id("com.hycite.docucite:id/thank_you_ok"),null),
+	btnThankUOK(MobileBy.id("com.hycite.docucite:id/thank_you_ok"),MobileBy.xpath("//XCUIElementTypeButton[@label='OK Button 55']")),
 	//Process Payment
 	popUpProcessPayment(MobileBy.id("com.hycite.docucite:id/alertTitle"),MobileBy.xpath("//XCUIElementTypeAlert[@name='Process Payment']")),
 	btnPaymentNo(MobileBy.id("android:id/button2"),MobileBy.AccessibilityId("No")),
