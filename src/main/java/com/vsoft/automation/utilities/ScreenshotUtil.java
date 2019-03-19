@@ -3,8 +3,6 @@ package com.vsoft.automation.utilities;
 import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -14,63 +12,17 @@ import com.vsoft.base.PageBase;
 import com.vsoft.core.report.ActionResult;
 import com.vsoft.core.report.Screenshot;
 
-import ru.yandex.qatools.ashot.AShot;
-import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
-
 public class ScreenshotUtil extends PageBase {
 
 	/**
-	 * To take screenshot using Ashot
-	 *
-	 * @param screenshotFilePath
-	 * @return Screenshot
-	 */
-	public static Screenshot takeScreenshot2(String screenshotFilePath) {
-
-		ru.yandex.qatools.ashot.Screenshot screenshot = new AShot()
-				.shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(getDriver());
-		File screenshotFile = new File(screenshotFilePath);
-
-		try {
-			ImageIO.write(screenshot.getImage(), "PNG", screenshotFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return new Screenshot(screenshotFile.getAbsolutePath(), screenshotFile);
-	}
-
-	/**
-	 * To generate screenshot path and take screenshot using Ashot
-	 * 
-	 * @param result
-	 * @return Screenshot
-	 */
-	public static Screenshot takeScreenshot2(ActionResult result) {
-
-		String screenshotFilePath = generateScreenshotPath(result.getActionName(), result.getElementName());
-
-		ru.yandex.qatools.ashot.Screenshot screenshot = new AShot()
-				.shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(getDriver());
-		File screenshotFile = new File(screenshotFilePath);
-		try {
-			ImageIO.write(screenshot.getImage(), "PNG", screenshotFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return new Screenshot(screenshotFile.getAbsolutePath(), screenshotFile);
-	}
-
-	/**
-	 * To generate screenshot path and take screenshot using Ashot
+	 * To generate screenshot path and take screenshot
 	 * 
 	 * @return Screenshot
 	 */
 	public static Screenshot assertTakeScreenshot() {
-		
 
-		
 		String screenshotFilePath = assertgenerateScreenshotPath();
-		
+
 		// Convert web driver object to TakeScreenshot
 		TakesScreenshot scrShot = ((TakesScreenshot) getDriver());
 
@@ -92,19 +44,6 @@ public class ScreenshotUtil extends PageBase {
 		}
 
 		return new Screenshot(DestFile.getAbsolutePath(), DestFile);
-	
-		
-
-//		String screenshotFilePath = assertgenerateScreenshotPath();
-//		ru.yandex.qatools.ashot.Screenshot screenshot = new AShot()
-//				.shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(getDriver());
-//		File screenshotFile = new File(screenshotFilePath);
-//		try {
-//			ImageIO.write(screenshot.getImage(), "PNG", screenshotFile);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		return new Screenshot(screenshotFile.getAbsolutePath(), screenshotFile);
 	}
 
 	/**
@@ -115,23 +54,21 @@ public class ScreenshotUtil extends PageBase {
 	 * @return ScreenshotPath
 	 */
 	private static String generateScreenshotPath(String actionName, String elementName) {
-		if(ConfigProperties.getOSName().contains("Mac OS"))
-		{
+		if (ConfigProperties.getOSName().contains("Mac OS")) {
 			File fld = new File(ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION_Mac_OS);
 			if (!fld.exists()) {
 				fld.mkdirs();
 			}
-			return ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION_Mac_OS + "//" + elementName.replace(" ", "") + "_" + actionName
-					+ TextUtil.getCurrentTimeStamp() + ".png";
+			return ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION_Mac_OS + "//" + elementName.replace(" ", "") + "_"
+					+ actionName + TextUtil.getCurrentTimeStamp() + ".png";
+		} else {
+			File fld = new File(ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION);
+			if (!fld.exists()) {
+				fld.mkdirs();
+			}
+			return ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION + "\\" + elementName.replace(" ", "") + "_"
+					+ actionName + TextUtil.getCurrentTimeStamp() + ".png";
 		}
-		else {
-		File fld = new File(ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION);
-		if (!fld.exists()) {
-			fld.mkdirs();
-		}
-		return ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION + "\\" + elementName.replace(" ", "") + "_" + actionName
-				+ TextUtil.getCurrentTimeStamp() + ".png";
-	}
 	}
 
 	/**
@@ -142,16 +79,14 @@ public class ScreenshotUtil extends PageBase {
 	 * @return ScreenshotPath
 	 */
 	private static String assertgenerateScreenshotPath() {
-		if(ConfigProperties.getOSName().contains("Mac OS"))
-		{
+		if (ConfigProperties.getOSName().contains("Mac OS")) {
 			File fld = new File(ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION_Mac_OS);
 			if (!fld.exists()) {
 				fld.mkdirs();
 			}
-			return ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION_Mac_OS + "//AssertFailed_" + TextUtil.getCurrentTimeStamp()
-					+ ".png";
-		}
-		else {
+			return ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION_Mac_OS + "//AssertFailed_"
+					+ TextUtil.getCurrentTimeStamp() + ".png";
+		} else {
 			File fld = new File(ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION);
 			if (!fld.exists()) {
 				fld.mkdirs();
@@ -168,9 +103,9 @@ public class ScreenshotUtil extends PageBase {
 	 * @return Screenshot
 	 */
 	public static Screenshot takeScreenshot(ActionResult result) {
-		
+
 		String screenshotFilePath = generateScreenshotPath(result.getActionName(), result.getElementName());
-		
+
 		// Convert web driver object to TakeScreenshot
 		TakesScreenshot scrShot = ((TakesScreenshot) getDriver());
 
