@@ -8,6 +8,7 @@ import com.aventstack.extentreports.ExtentReporter;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.impl.ConsoleLogger;
+import com.vsoft.automation.config.ConfigProperties;
 
 public class ExtentReportManager {
 
@@ -23,7 +24,11 @@ public class ExtentReportManager {
 	 */
 	public static void initExtentReporter(String reportName) {
 		extent = new ExtentReports();
-		htmlReportPath = "src\\..\\Reports\\" + reportName + getUniqId() + ".html";
+		if (ConfigProperties.getOSName().contains("Mac OS"))
+			htmlReportPath = "src//..//Reports//" + reportName + getUniqId() + ".html";
+		else
+			htmlReportPath = "src\\..\\Reports\\" + reportName + getUniqId() + ".html";
+
 		report = new ExtentHtmlReporter(htmlReportPath);
 		ConsoleLogger logger = new ConsoleLogger();
 		extent.setAnalysisStrategy(AnalysisStrategy.SUITE);

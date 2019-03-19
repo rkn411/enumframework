@@ -13,8 +13,14 @@ public abstract class ConfigProperties {
 	public static final String TEST_DATA_FILE_NAME = "Global";
 
 	public static final String TEST_REPORT_FILE_TYPE = "html";
+	
+	//Windows OS
 	public static final String TEST_REPORT_FILE_LOCATION = "src\\..\\Reports";
 	public static final String TEST_REPORT_SCREENSHOT_LOCATION = TEST_REPORT_FILE_LOCATION + "\\ScreenShots";
+	
+	//Mac OS
+	public static final String TEST_REPORT_FILE_LOCATION_Mac_OS = "src//..//Reports";
+	public static final String TEST_REPORT_SCREENSHOT_LOCATION_Mac_OS = TEST_REPORT_FILE_LOCATION_Mac_OS + "//ScreenShots";
 
 	public static final String TEST_REPORT_FILE_NAME = "VSoftAutomation";
 
@@ -30,7 +36,6 @@ public abstract class ConfigProperties {
 	public static final String URL = "";
 	public static final String USERNAME = "ROML0027";
 	public static final String PASSWORD = "Devdev2345!!";
-	
 
 	public static final int IMPLICIT_WAIT_TIME = 20;
 	public static final int EXPLICIT_WAIT_TIME = 20;
@@ -55,4 +60,7 @@ public abstract class ConfigProperties {
 				.indexOf("jdwp") >= 0;
 	}
 
+	public static String getOSName() {
+		return System.getProperty("os.name");
+	}
 }

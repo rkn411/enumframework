@@ -87,12 +87,23 @@ public class ScreenshotUtil extends PageBase {
 	 * @return ScreenshotPath
 	 */
 	private static String generateScreenshotPath(String actionName, String elementName) {
+		if(ConfigProperties.getOSName().contains("Mac OS"))
+		{
+			File fld = new File(ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION_Mac_OS);
+			if (!fld.exists()) {
+				fld.mkdirs();
+			}
+			return ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION_Mac_OS + "//" + elementName.replace(" ", "") + "_" + actionName
+					+ TextUtil.getCurrentTimeStamp() + ".png";
+		}
+		else {
 		File fld = new File(ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION);
 		if (!fld.exists()) {
 			fld.mkdirs();
 		}
 		return ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION + "\\" + elementName.replace(" ", "") + "_" + actionName
 				+ TextUtil.getCurrentTimeStamp() + ".png";
+	}
 	}
 
 	/**
@@ -103,12 +114,23 @@ public class ScreenshotUtil extends PageBase {
 	 * @return ScreenshotPath
 	 */
 	private static String assertgenerateScreenshotPath() {
-		File fld = new File(ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION);
-		if (!fld.exists()) {
-			fld.mkdirs();
+		if(ConfigProperties.getOSName().contains("Mac OS"))
+		{
+			File fld = new File(ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION_Mac_OS);
+			if (!fld.exists()) {
+				fld.mkdirs();
+			}
+			return ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION_Mac_OS + "//AssertFailed_" + TextUtil.getCurrentTimeStamp()
+					+ ".png";
 		}
-		return ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION + "\\AssertFailed_" + TextUtil.getCurrentTimeStamp()
-				+ ".png";
+		else {
+			File fld = new File(ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION);
+			if (!fld.exists()) {
+				fld.mkdirs();
+			}
+			return ConfigProperties.TEST_REPORT_SCREENSHOT_LOCATION + "\\AssertFailed_" + TextUtil.getCurrentTimeStamp()
+					+ ".png";
+		}
 	}
 
 	/**
